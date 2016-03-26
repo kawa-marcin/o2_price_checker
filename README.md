@@ -26,6 +26,12 @@ South Africa 1.00
 
 ```
 
+## Run tests
+
+```
+$ python test.py
+```
+
 ## Basic usage
 
 ```python
