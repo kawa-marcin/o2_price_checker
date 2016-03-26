@@ -25,6 +25,7 @@ class O2PriceInspector(object):
         self.driver.get(self.url)
         self.country_input = self.driver.find_element_by_id("countryName")
 
+        self._ajax_load_timeout = 5
         self._ajax_loaded_el = ("//div[@id='paymonthlyTariffPlan']"
                                 "//h2[text()[contains(.,'%s')]]")
         self._price_td_el = ("//table[@id='standardRatesTable']"
@@ -45,7 +46,7 @@ class O2PriceInspector(object):
         self.country_input.send_keys(Keys.RETURN)
 
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, self._ajax_load_timeout).until(
                 EC.presence_of_element_located((
                     By.XPATH,
                     self._ajax_loaded_el % country_name)
